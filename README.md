@@ -1,3 +1,4 @@
+# Introduction
 ## Quickstart
 
 
@@ -24,3 +25,23 @@
    ```bash
    labelu-ml start my_ml_app
    ```
+
+## Usage
+
+### Command line
+```
+$ labelu-ml --help
+                                                                                                                                                     
+ Usage: labelu-ml [OPTIONS] COMMAND [ARGS]...                                                                                                        
+                                                                                                                                                     
+╭─ Options ─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
+│ --install-completion          Install completion for the current shell.                                                                           │
+│ --show-completion             Show completion for the current shell, to copy it or customize the installation.                                    │
+│ --help                        Show this message and exit.                                                                                         │
+╰───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+╭─ Commands ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
+│ init                  Initailize an ML app from a example.                                                                                        │
+│ start                 Start ML app server.                                                                                                        │
+╰───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+
+```
