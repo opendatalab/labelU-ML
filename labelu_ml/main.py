@@ -4,16 +4,16 @@ import shutil
 import uvicorn
 import importlib
 from loguru import logger
-from typer import Typer, Argument
+from typer import Typer, Argument, Option
 from typing import List, Optional
 
 
 cli = Typer()
 
-@cli.command(name="init", help="Initailize an ML app from a example")
+@cli.command(name="init", help="Initailize an ML app from a example.")
 def init(
-    app: str = Argument(...),
-    path: Optional[str] = None,
+    app: str = Argument(..., help="Application name."),
+    path: Optional[str] = Option(default="labelu_ml/examples/the_simplest_app", help="LabelU-ML example path."),
 ):
     logger.debug(f"init current path is: {os.getcwd()}")
     output_dir = os.path.join(app)
@@ -24,14 +24,14 @@ def init(
         raise FileNotFoundError(path)
     shutil.copytree(path, output_dir)
 
-@cli.command(name="start", help="Start ML app server")
+@cli.command(name="start", help="Start ML app server.")
 def start(
-    app: str,
-    host: Optional[str] = "localhost",
-    port: Optional[int] = 9000,
-    with_args: Optional[List[str]] = None,
+    app: str = Argument(..., help="Application name."),
+    host: Optional[str] = Option(default="localhost", help="Bind socket to this host."),
+    port: Optional[int] = Option(default=9000, help="Bind socket to this port."),
+    with_args: Optional[List[str]] = Option(default=None, help="Application args."),
 ):
-    logger.debug(f"current path is: {os.getcwd()}")
+    logger.debug(f"application current path is: {os.getcwd()}")
     sys.path.append(os.getcwd())
 
     app_name = app.strip(".").strip("/")
