@@ -1,0 +1,22 @@
+[tool.poetry]
+name = "labelu-ml"
+version = "0.1.0"
+description = ""
+authors = ["pengjinhu <pengjinhu@pjlab.org.cn>"]
+readme = "README.md"
+packages = [{include = "labelu_ml"}]
+
+[tool.poetry.scripts]
+labelu-ml = "labelu_ml.main:cli"
+
+[tool.poetry.dependencies]
+python = "^3.7"
+fastapi = "^0.88.0"
+uvicorn = "^0.20.0"
+typer = {extras = ["all"], version = "^0.7.0"}
+loguru = "^0.6.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
