@@ -3,26 +3,40 @@ import sys
 import shutil
 import uvicorn
 import importlib
+from pathlib import Path
 from loguru import logger
-from typer import Typer, Argument, Option
 from typing import List, Optional
+from typer import Typer, Argument, Option
 
 
 cli = Typer()
 
+
 @cli.command(name="init", help="Initailize an ML app from a example.")
 def init(
     app: str = Argument(..., help="Application name."),
-    path: Optional[str] = Option(default="labelu_ml/examples/the_simplest_app", help="LabelU-ML example path."),
+    path: Optional[Path] = Option(
+        default="labelu_ml/examples/the_simplest_app", help="LabelU-ML example path."
+    ),
 ):
+
+    if not path.exists():
+        folder = "labelu_ml/examples"
+        sub_folders = [
+            os.path.join(folder, name)
+            for name in os.listdir(folder)
+            if os.path.isdir(os.path.join(folder, name))
+        ]
+        logger.error(f"labelu ml example paths:{sub_folders}")
+        raise NotADirectoryError(path)
+
     logger.debug(f"init current path is: {os.getcwd()}")
     output_dir = os.path.join(app)
     if os.path.exists(output_dir):
         shutil.rmtree(output_dir)
-    
-    if not os.path.exists(path):
-        raise FileNotFoundError(path)
+
     shutil.copytree(path, output_dir)
+
 
 @cli.command(name="start", help="Start ML app server.")
 def start(
